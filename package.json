@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/cucumber-js --require cucumber.js --require step-definations/**/*.js -f json:cucumber-report.json --publish-quiet"
   },
   "author": "",
   "license": "ISC",

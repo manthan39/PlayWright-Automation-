@@ -1,0 +1,54 @@
+[
+  {
+    "description": "    As a user\n    I want login into application",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-action;login-with-valid-credentails",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Login with valid credentails",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 598000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I visit a login page",
+            "match": {
+              "location": "step-definations/login-step.js:3"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5002000000,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout._onTimeout (/Users/mbhatiya/Desktop/PlayWright/node_modules/@cucumber/cucumber/lib/user_code_runner.js:63:28)\n    at listOnTimeout (node:internal/timers:559:17)\n    at processTimers (node:internal/timers:502:7)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 63000000
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-action",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "login action",
+    "tags": [],
+    "uri": "features/login.feature"
+  }
+]
