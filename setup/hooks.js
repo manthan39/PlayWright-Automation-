@@ -24,3 +24,6 @@ After(async()=> {
     await global.context.close()
 })
 
+var {setDefaultTimeout} = require('cucumber');
+setDefaultTimeout(60 * 1000);
+

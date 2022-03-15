@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 598000000
+              "duration": 508000000
             }
           },
           {
@@ -23,12 +23,63 @@
             "line": 7,
             "name": "I visit a login page",
             "match": {
-              "location": "step-definations/login-step.js:3"
+              "location": "step-definations/login-step.js:5"
             },
             "result": {
-              "status": "failed",
-              "duration": 5002000000,
-              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout._onTimeout (/Users/mbhatiya/Desktop/PlayWright/node_modules/@cucumber/cucumber/lib/user_code_runner.js:63:28)\n    at listOnTimeout (node:internal/timers:559:17)\n    at processTimers (node:internal/timers:502:7)"
+              "status": "passed",
+              "duration": 3127000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "Enter Username",
+            "match": {
+              "location": "step-definations/login-step.js:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "Enter password",
+            "match": {
+              "location": "step-definations/login-step.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "Click on the Login Button",
+            "match": {
+              "location": "step-definations/login-step.js:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2181000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "Verify the logo",
+            "match": {
+              "location": "step-definations/login-step.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 384000000
             }
           },
           {
@@ -36,7 +87,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 63000000
+              "duration": 78000000
             }
           }
         ],
