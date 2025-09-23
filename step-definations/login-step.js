@@ -17,6 +17,8 @@ When("Enter password", async function(){
 
 When ("Click on the Login Button", async function(){
     await page.locator('#ctl00_indexLogin2_lnkbtnSiginIn').click();
+        await page.locator('#ctl00_indexLogin2_lnkbtnSiginIn').click()
+
 })
 
 Then ("Verify the logo", async function(){
