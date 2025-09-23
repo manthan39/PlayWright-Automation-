@@ -4,43 +4,36 @@ import sys
 import requests
 from github import Github, Auth
 
-# -----------------------------
-# GitHub & environment setup
-# -----------------------------
 repo_name = os.getenv("GITHUB_REPOSITORY")
 token = os.getenv("GITHUB_TOKEN")
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 
 if not gemini_api_key:
-    print("❌ ERROR: GEMINI_API_KEY is missing. Set it in GitHub Secrets.")
     sys.exit(1)
 
-# Load PR number safely from GitHub event payload
 with open(os.getenv("GITHUB_EVENT_PATH")) as f:
     event = json.load(f)
 pr_number = event["number"]
 
-# Connect to GitHub
 g = Github(auth=Auth.Token(token))
 repo = g.get_repo(repo_name)
 pr = repo.get_pull(int(pr_number))
 
-# Collect changed files
 changed_files = [{"filename": f.filename, "patch": f.patch} for f in pr.get_files()]
 
-# -----------------------------
-# Build the enhanced checklist prompt
-# -----------------------------
 checklist_prompt = """
 Review the PR changes and provide a detailed AI review.
-
 Rules:
 - Use ✅ for pass and ❌ for fail.
 - Keep comments short (1 line max).
 - Group items by category as headers.
 - Detect syntax errors in the code.
-- Check for missing semicolons (for JS, Java, or similar languages).
-- At the end, provide an overall recommendation: "Good to merge ✅" or "Needs changes ❌".
+- Check for missing semicolons where applicable.
+- At the end, provide an overall recommendation in **this exact format**:
+
+Overall Recommendation: Good to merge ✅
+or
+Overall Recommendation: Needs changes ❌
 
 ### 📝 Readability & Maintainability
 - Code follows project coding standards / naming conventions
@@ -86,11 +79,6 @@ Rules:
 - No sensitive info in repo
 - Changes scoped properly
 - PR description includes summary & test evidence
-
-Extra checks:
-- Check for syntax errors
-- Check for missing semicolons where applicable
-- Provide an overall recommendation: Good to merge ✅ or Needs changes ❌
 """
 
 prompt = f"""
@@ -101,44 +89,26 @@ Changed Files: {changed_files}
 {checklist_prompt}
 """
 
-# -----------------------------
-# Gemini API call (official format)
-# -----------------------------
 url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-headers = {
-    "Content-Type": "application/json",
-    "X-goog-api-key": gemini_api_key
-}
-payload = {
-    "contents": [
-        {
-            "parts": [
-                {"text": prompt}
-            ]
-        }
-    ]
-}
+headers = {"Content-Type": "application/json", "X-goog-api-key": gemini_api_key}
+payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
 response = requests.post(url, headers=headers, json=payload)
 
 if response.status_code != 200:
-    print("❌ Gemini API request failed")
-    print("Status:", response.status_code)
-    print("Response:", response.text)
     sys.exit(1)
 
 result = response.json()
 
 if "candidates" not in result:
-    print("❌ Gemini API did not return candidates")
-    print(json.dumps(result, indent=2))
     sys.exit(1)
 
-# Extract AI review
 ai_review = result["candidates"][0]["content"]["parts"][0]["text"]
 
-# -----------------------------
-# Post review as a PR comment
-# -----------------------------
 pr.create_issue_comment(f"### 🤖 AI Code Review\n\n{ai_review}")
-print("✅ AI Review posted to PR")
+
+if "Overall Recommendation: Good to merge ✅" in ai_review:
+    try:
+        pr.merge(commit_title=f"Auto-merged PR #{pr_number}: {pr.title}", merge_method="squash")
+    except:
+        pass
