@@ -34,7 +34,8 @@ Rules:
 - Use ✅ for pass and ❌ for fail.
 - Keep comments short (1 line max).
 - Group items by category as headers.
-- Detect syntax errors in the code.
+- Detect general syntax errors in the code.
+- Detect TypeScript syntax errors specifically.
 - Check for missing semicolons where applicable.
 - Flag new or insecure dependencies.
 - Suggest performance/efficiency improvements.
