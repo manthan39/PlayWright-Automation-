@@ -1,7 +1,6 @@
 import os
 import json
 import sys
-import re
 import requests
 from github import Github, Auth
 
@@ -56,12 +55,7 @@ Rules:
 - Check for missing semicolons where applicable.
 - Flag new or insecure dependencies.
 - Suggest performance/efficiency improvements.
-- Focus on changed lines only and provide inline suggestions in this format:
-
-INLINE SUGGESTION:
-file: <filename>
-line: <line_number>
-comment: <your suggestion>
+- Focus on changed lines only.
 
 CATEGORIES:
 
@@ -170,30 +164,9 @@ def format_ai_review_colored(ai_text):
 ai_review_formatted = format_ai_review_colored(ai_review)
 
 # -----------------------------
-# Post formatted AI review as a PR comment
+# Post AI review as a single PR comment
 # -----------------------------
 pr.create_issue_comment(f"### 🤖 AI Code Review\n\n{ai_review_formatted}")
-
-# -----------------------------
-# Parse inline suggestions from AI text
-# -----------------------------
-inline_comments = []
-pattern = r"INLINE SUGGESTION:\s*file:\s*(.*)\s*line:\s*(\d+)\s*comment:\s*(.*)"
-matches = re.findall(pattern, ai_review, re.MULTILINE)
-
-for match in matches:
-    filename, line_number, comment = match
-    inline_comments.append({
-        "path": filename.strip(),
-        "line": int(line_number.strip()),
-        "body": comment.strip()
-    })
-
-# -----------------------------
-# Post inline comments as review
-# -----------------------------
-if inline_comments:
-    pr.create_review(event="COMMENT", comments=inline_comments)
 
 # -----------------------------
 # Auto-merge if AI approves
