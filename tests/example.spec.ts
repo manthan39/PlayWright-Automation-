@@ -7,3 +7,5 @@ test('basic test', async ({ page }) => {
   const title = page.locator('.navbar__inner .navbar__title');
   await expect(title).toHaveText('Playwright');
 });
+
+}}
