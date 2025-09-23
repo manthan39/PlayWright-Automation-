@@ -49,13 +49,14 @@ Review the PR changes and provide a detailed AI review.
 Rules:
 - Use ✅ for pass and ❌ for fail.
 - Keep comments short (1 line max).
-- Group items by category as headers.
-- Detect general syntax errors in the code.
-- Detect TypeScript syntax errors specifically.
-- Check for missing semicolons where applicable.
-- Flag new or insecure dependencies.
-- Suggest performance/efficiency improvements.
-- Focus on changed lines only.
+- Detect syntax errors, runtime issues, and failing tests.
+- Include filename and line number for each issue in this format:
+
+FILE: <filename>
+LINE: <line_number>
+ISSUE: <short description of problem/failure>
+
+Focus on changed lines only.
 
 CATEGORIES:
 
@@ -142,26 +143,37 @@ if "candidates" not in result:
 ai_review = result["candidates"][0]["content"]["parts"][0]["text"]
 
 # -----------------------------
-# Format AI review: color + collapsible ✅ / bold ❌
+# Format AI review: color + collapsible ✅ / bold ❌ with file & line
 # -----------------------------
-def format_ai_review_colored(ai_text):
+def format_ai_review_with_file_lines(ai_text):
     formatted_lines = []
+    current_file = ""
+    current_line = ""
     for line in ai_text.splitlines():
         line = line.strip()
-        if line.startswith("✅"):
-            # Green + collapsible
-            formatted_lines.append(
-                f'<details><summary><span style="color:green;">{line}</span></summary></details>'
-            )
-        elif line.startswith("❌"):
-            # Red + bold
-            formatted_lines.append(f'<b><span style="color:red;">{line}</span></b>')
+        if line.startswith("FILE:"):
+            current_file = line.replace("FILE:", "").strip()
+            formatted_lines.append(f"\n### File: {current_file}")
+        elif line.startswith("LINE:"):
+            current_line = line.replace("LINE:", "").strip()
+            formatted_lines.append(f"- Line: {current_line}")
+        elif line.startswith("ISSUE:"):
+            issue_text = line.replace("ISSUE:", "").strip()
+            if "✅" in issue_text:
+                formatted_lines.append(
+                    f"<details><summary><span style='color:green;'>{issue_text}</span></summary></details>"
+                )
+            elif "❌" in issue_text:
+                formatted_lines.append(
+                    f"<b><span style='color:red;'>{issue_text}</span></b>"
+                )
+            else:
+                formatted_lines.append(issue_text)
         else:
-            # Keep other lines (category headers, overall recommendation)
             formatted_lines.append(line)
     return "\n".join(formatted_lines)
 
-ai_review_formatted = format_ai_review_colored(ai_review)
+ai_review_formatted = format_ai_review_with_file_lines(ai_review)
 
 # -----------------------------
 # Post AI review as a single PR comment
