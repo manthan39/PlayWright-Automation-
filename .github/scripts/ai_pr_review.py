@@ -29,13 +29,18 @@ pr = repo.get_pull(int(pr_number))
 changed_files = [{"filename": f.filename, "patch": f.patch} for f in pr.get_files()]
 
 # -----------------------------
-# Build the checklist prompt
+# Build the enhanced checklist prompt
 # -----------------------------
 checklist_prompt = """
-Review the PR changes against the following checklist.
-Use ✅ for pass and ❌ for fail.
-Keep comments short (1 line max). 
-Group items by category as headers.
+Review the PR changes and provide a detailed AI review.
+
+Rules:
+- Use ✅ for pass and ❌ for fail.
+- Keep comments short (1 line max).
+- Group items by category as headers.
+- Detect syntax errors in the code.
+- Check for missing semicolons (for JS, Java, or similar languages).
+- At the end, provide an overall recommendation: "Good to merge ✅" or "Needs changes ❌".
 
 ### 📝 Readability & Maintainability
 - Code follows project coding standards / naming conventions
@@ -81,6 +86,11 @@ Group items by category as headers.
 - No sensitive info in repo
 - Changes scoped properly
 - PR description includes summary & test evidence
+
+Extra checks:
+- Check for syntax errors
+- Check for missing semicolons where applicable
+- Provide an overall recommendation: Good to merge ✅ or Needs changes ❌
 """
 
 prompt = f"""
