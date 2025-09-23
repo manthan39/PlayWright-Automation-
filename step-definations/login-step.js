@@ -28,6 +28,6 @@ Then ("Verify the logo", async function(){
     
 })
 
-Then("Logout from the application", async function(){
+Then("login from the application", async function(){
     await page.click('#ctl00_headerTopStudent_lnkbtnSignout')
 })
