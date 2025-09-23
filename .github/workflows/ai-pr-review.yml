@@ -7,6 +7,7 @@ on:
 jobs:
   ai-pr-review:
     runs-on: ubuntu-latest
+    environment: test   # 👈 IMPORTANT: match your environment name
 
     steps:
       - name: Checkout PR code
@@ -23,5 +24,5 @@ jobs:
       - name: Run AI Review
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # 👈 Now available
         run: python .github/scripts/ai_pr_review.py
