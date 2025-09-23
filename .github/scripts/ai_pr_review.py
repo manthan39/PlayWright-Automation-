@@ -46,20 +46,61 @@ file: <filename>
 line: <line_number>
 comment: <your suggestion>
 
+- Include a checklist with the following format.
+- For items that pass, show green text: <span style="color:green">Yes ✅</span>
+- For items that fail, show red text: <span style="color:red">No ❌</span>
+- Fill in each item appropriately based on your review.
+
+Readability & Maintainability:
+- Code follows project coding standards / naming conventions: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Test case names are descriptive, meaningful, and consistent: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Proper indentation, spacing, and formatting: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Functions are modular (single responsibility): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Comments added only where needed: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
+Test Case Design:
+- Scripts reflect business requirements: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- No duplication, reusable components used: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Test data parameterized (not hardcoded): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Assertions are meaningful and specific: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Edge cases and negative tests included: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
+Framework & Best Practices:
+- Follows framework structure (e.g., POM, BDD): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Reusable utilities/helpers used: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Adheres to DRY and SOLID principles: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Proper waits (explicit > implicit > no sleep): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- No hardcoded locators, URLs, or credentials: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
+Code Quality:
+- Proper exception handling: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Standardized logging, minimal prints: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- No unused imports/variables/commented code: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Dependencies justified: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
+Scalability & Maintainability:
+- Locators are robust & maintainable: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Test data externalized (CSV/JSON/Config): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Environment configurable (not hardcoded): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Code changes don’t break existing suites: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
+Execution & Reporting:
+- Scripts run independently (no dependency): <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Supports parallel execution: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Reports/logs are consistent and meaningful: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Failures provide useful debug info: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
+Version Control & Collaboration:
+- Commit messages are clear & follow guidelines: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- No sensitive info in repo: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- Changes scoped properly: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+- PR description includes summary & test evidence: <span style="color:green">Yes ✅</span> / <span style="color:red">No ❌</span>
+
 - At the end, provide an overall recommendation in this exact format:
 
 Overall Recommendation: Good to merge ✅
 or
 Overall Recommendation: Needs changes ❌
-"""
-
-prompt = f"""
-PR Title: {pr.title}
-PR Description: {pr.body}
-Changed Files: {changed_files}
-Diff Context: {diff_context}
-
-{checklist_prompt}
 """
 
 url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
