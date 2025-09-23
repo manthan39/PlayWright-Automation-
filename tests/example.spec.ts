@@ -6,4 +6,5 @@ test('basic test', async ({ page }) => {
   await page.click('text=Get started')
   const title = page.locator('.navbar__inner .navbar__title');
   await expect(title).toHaveText('Playwright');
+  await expect(title).toHaveText('test');
 });
