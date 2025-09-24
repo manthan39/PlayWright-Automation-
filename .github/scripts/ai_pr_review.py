@@ -134,10 +134,11 @@ CATEGORIES:
 - Failures provide debug info
 
 9️⃣ Version Control & Collaboration
-- Commit messages clear & scoped
-- No sensitive data in repo
-- Branching strategy followed
-- PR includes summary + test evidence
+- Commit messages are clear & follow guidelines
+- No sensitive info in repo
+- Changes scoped properly
+- PR description includes summary & test evidence
+- ❌ Highlight if PR Title or Description is missing, vague, or unhelpful
 
 10️⃣ Framework Specific Guidelines (Playwright)
 - Prefer stable locators (ID > Name > CSS > XPath)
