@@ -78,14 +78,14 @@ Adherence to these standards is a mandatory part of our quality engineering proc
 
 CATEGORIES:
 
-1️⃣ General Principles
+✨ General Principles
 - Clean, concise, self-explanatory code
 - DRY (Don’t Repeat Yourself)
 - KISS (Keep It Simple, Stupid)
 - Single Responsibility Principle
 - Fail fast: immediate feedback on errors
 
-2️⃣ Naming Conventions
+🏷️ Naming Conventions
 - Projects/Modules: PascalCase
 - Test files/classes: PascalCase (e.g., LoginPageTests)
 - Test methods: test_ / verify_ prefix, descriptive names
@@ -93,20 +93,20 @@ CATEGORIES:
 - Constants: ALL_CAPS
 - Page object locators: prefixed descriptive names
 
-3️⃣ Code Formatting & Structure
+🧩 Code Formatting & Structure
 - Consistent indentation (no mixing spaces/tabs)
 - Line length < 120 chars
 - Organized imports (standard → third-party → project)
 - No unused/commented code
 
-4️⃣ Comments & Documentation
+📝 Comments & Documentation
 - Author block in each `.spec.ts` test
 - Explain “why”, not “what”
 - Concise, up-to-date comments
 - Use TODO for improvements
 - Use language-appropriate docstrings
 
-5️⃣ Test Design & Structure
+🧪 Test Design & Structure
 - POM / SOM applied properly
 - Test data externalized (CSV/JSON/Config)
 - Tests atomic and independent
@@ -115,32 +115,32 @@ CATEGORIES:
 - Screenshots/logging on failure
 - Logging with appropriate levels
 
-6️⃣ Error Handling & Robustness
+🛡️ Error Handling & Robustness
 - Proper exception handling (no blanket catch)
 - Explicit waits > Thread.sleep
 - Idempotent tests (repeatable runs)
 - Retries documented only when justified
 
-7️⃣ Framework & Best Practices
+⚙️ Framework & Best Practices
 - Reusable helpers/utilities
 - Robust maintainable locators
 - No hardcoded credentials, URLs, or locators
 - DRY and SOLID principles
 - Parallel execution supported
 
-8️⃣ Execution & Reporting
+📊 Execution & Reporting
 - Tests run independently
 - Reporting/logging meaningful
 - Failures provide debug info
 
-9️⃣ Version Control & Collaboration
-- Commit messages are clear & follow guidelines
-- No sensitive info in repo
+🤝 Version Control & Collaboration
+- Commit messages clear & scoped
+- No sensitive data in repo
 - Changes scoped properly
-- PR description includes summary & test evidence
-- ❌ Highlight if PR Title or Description is missing, vague, or unhelpful
+- PR Title & Description must be meaningful (❌ if vague/missing)
+- PR includes summary & test evidence
 
-10️⃣ Framework Specific Guidelines (Playwright)
+🎭 Framework Specific Guidelines (Playwright)
 - Prefer stable locators (ID > Name > CSS > XPath)
 - Handle dynamic elements robustly
 - Custom utilities documented
