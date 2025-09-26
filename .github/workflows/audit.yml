@@ -8,7 +8,7 @@ on:
       - '**/*.ts'
       - '**/*.spec.ts'
       - 'scripts/**'
-  workflow_dispatch:
+
 
 jobs:
   audit:
