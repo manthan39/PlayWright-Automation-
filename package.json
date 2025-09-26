@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
        "build": "tsc",
-    "generate-audit": "ts-node scripts/generate-audit.ts",
+    "generate-audit": "ts-node .github/scripts/generate-audit.ts",
     "test": "./node_modules/.bin/cucumber-js --require cucumber.js --require step-definations/**/*.js -f json:cucumber-report.json --publish-quiet"
   },
   "author": "",
