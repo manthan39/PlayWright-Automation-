@@ -1,11 +1,7 @@
 ---
 name: Audit & Dashboard
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+  workflow_dispatch:
     paths:
       - "**/*.ts"
       - "**/*.spec.ts"
