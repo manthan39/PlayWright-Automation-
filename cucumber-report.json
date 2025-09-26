@@ -1,6 +1,8 @@
 [
   {
-    "description": "    As a user\n    I want login into applications now one",
+
+    "description": "    As a user\n    I want login into applications now",
+
     "elements": [
       {
         "description": "",
