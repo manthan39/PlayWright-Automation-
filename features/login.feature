@@ -1,7 +1,7 @@
 Feature: login action
 
     As a user
-    I want login into application
+    I want login into applications
 
     Scenario: Login with valid credentails
         Given I visit a login page
