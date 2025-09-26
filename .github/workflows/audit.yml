@@ -22,10 +22,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - name: Install npm
-        run: npm install
+          
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Run audit generation
         run: npm run generate-audit
       - name: Commit audit files
