@@ -2,7 +2,7 @@ const {Given,When,Then,DefineStep}=require('@cucumber/cucumber')
 const { expect } = require('chai')
 
 
-Given("I visit a login page", async function(){
+Given("I visit a login page1", async function(){
     await page.goto('http://testyou.in')
     await page.click('#ctl00_headerTop_Signin')
 })
