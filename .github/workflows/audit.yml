@@ -1,9 +1,9 @@
 name: Audit & Dashboard
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
     paths:
       - '**/*.ts'
       - '**/*.spec.ts'
